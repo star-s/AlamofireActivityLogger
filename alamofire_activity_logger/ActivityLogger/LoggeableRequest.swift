@@ -56,7 +56,10 @@ public extension LoggeableRequest {
             return self
         }
         
-        Logger.logRequest(request: request, level: level, options: options, printer: printer)
+        DispatchQueue.main.async {
+            Logger.logRequest(request: self.request, level: level, options: options, printer: printer)
+        }
+        //Logger.logRequest(request: request, level: level, options: options, printer: printer)
         fetchResponseInfo { response in
             Logger.logResponse(request: self.request, response: response, level: level, options: options, printer: printer)
         }
