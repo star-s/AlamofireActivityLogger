@@ -45,7 +45,7 @@ public extension LoggeableRequest {
     /**
      Log the request and response with the given level and options
      */
-    public func log(level: LogLevel = .all, options: [LogOption] = LogOption.defaultOptions, printer: Printer = NativePrinter()) -> Self {
+    func log(level: LogLevel = .all, options: [LogOption] = LogOption.defaultOptions, printer: Printer = NativePrinter()) -> Self {
         
         guard level != .none else {
             return self
@@ -79,7 +79,7 @@ extension DataRequest: LoggeableRequest {
             let logResponse = ResponseInfo(httpResponse: response.response,
                                            data: response.data,
                                            error: error,
-                                           elapsedTime:  response.timeline.requestDuration)
+                                           elapsedTime:  0/*response.timeline.requestDuration*/)
             completion(logResponse)
         }
         
@@ -104,7 +104,7 @@ extension DownloadRequest: LoggeableRequest {
             let logResponse = ResponseInfo(httpResponse: response.response,
                                            data: data,
                                            error: error,
-                                           elapsedTime:  response.timeline.requestDuration)
+                                           elapsedTime:  0/*response.timeline.requestDuration*/)
             completion(logResponse)
         }
     }
